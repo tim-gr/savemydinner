@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Save My Dinner</string>
+    <string name="find_meal_header">Find my meal</string>
+    <string name="find_meal_include">Include this:</string>
+    <string name="find_meal_exclude">Exclude this:</string>
+    <string name="find_meal_start_search">Search</string>
+
+    <string-array name="ingredients_array">
+        <item>Banana</item>
+        <item>Mango</item>
+        <item>Kiwi</item>
+        <item>Chicken</item>
+        <item>Chili</item>
+        <item>Apple</item>
+        <item>Salad</item>
+        <item>Sourcream</item>
+    </string-array>
+
+</resources>
