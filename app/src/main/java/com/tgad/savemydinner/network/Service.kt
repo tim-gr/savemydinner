@@ -17,6 +17,9 @@ import retrofit2.http.GET
 
 interface RecipeService {
     @GET("recipes")
+    fun getRecipesLocalNetworkAsync(): Deferred<List<NetworkRecipe>>
+
+    @GET("recipes/findByIngredients?ingredients=noodles,+tomatoes&number=5&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c")
     fun getRecipesAsync(): Deferred<List<NetworkRecipe>>
 }
 
@@ -34,10 +37,24 @@ private val moshi = Moshi.Builder()
 object Network {
     // Configure retrofit to parse JSON and use coroutines
     private val retrofit = Retrofit.Builder()
+        .baseUrl("https://api.spoonacular.com")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
+
+    val recipeApi: RecipeService = retrofit.create(RecipeService::class.java)
+}
+
+/**
+ * Main entry point for network access when only calling localhost (for development purposes)
+ */
+object NetworkLocal {
+    // Configure retrofit to parse JSON and use coroutines
+    private val retrofit = Retrofit.Builder()
         .baseUrl("http://10.0.2.2:8000")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-    val recipeApi = retrofit.create(RecipeService::class.java)
+    val recipeApi: RecipeService = retrofit.create(RecipeService::class.java)
 }

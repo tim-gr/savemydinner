@@ -6,6 +6,7 @@ import com.tgad.savemydinner.database.RecipeDatabase
 import com.tgad.savemydinner.database.asDomainModel
 import com.tgad.savemydinner.domain.Recipe
 import com.tgad.savemydinner.network.Network
+import com.tgad.savemydinner.network.NetworkLocal
 import com.tgad.savemydinner.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,8 +20,13 @@ class RecipeRepository(private val database: RecipeDatabase) {
     // Use of Coroutine => suspend
     suspend fun refreshRecipes() {
         withContext(Dispatchers.IO) { // Disk IO would otherwise block the main thread
-            // All database calls here!
-            val recipes = Network.recipeApi.getRecipesAsync().await()
+
+            //val recipes = Network.recipeApi.getRecipesAsync().await()
+
+            // Calls localhost (Activate for development)
+            val recipes = NetworkLocal.recipeApi.getRecipesLocalNetworkAsync().await()
+
+            // All database calls here (in this context)!
             database.recipeDao.clear()
             database.recipeDao.insertAll(*recipes.asDatabaseModel())
         }
