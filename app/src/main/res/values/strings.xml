@@ -4,6 +4,8 @@
     <string name="find_meal_include">Include this:</string>
     <string name="find_meal_exclude">Exclude this:</string>
     <string name="find_meal_start_search">Search</string>
+    <string name="content_description_recipe_image">Image of a recipe</string>
+    <string name="find_meal_include_input">Fill in the ingredients that you would like to include.</string>
 
     <string-array name="ingredients_array">
         <item>Banana</item>

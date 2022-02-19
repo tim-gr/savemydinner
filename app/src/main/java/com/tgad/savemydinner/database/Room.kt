@@ -11,6 +11,9 @@ interface RecipeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg videos: DatabaseRecipe)
+
+    @Query("delete from databaserecipe")
+    fun clear()
 }
 
 @Database(entities = [DatabaseRecipe::class], version = 1)

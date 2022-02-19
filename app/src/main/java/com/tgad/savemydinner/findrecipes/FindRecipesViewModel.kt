@@ -11,6 +11,7 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
 
     private val database = getDatabase(application)
     private val recipeRepository = RecipeRepository(database)
+
     val recipes = recipeRepository.recipes
 
     private var _includedIngredients = MutableLiveData<List<String>>()

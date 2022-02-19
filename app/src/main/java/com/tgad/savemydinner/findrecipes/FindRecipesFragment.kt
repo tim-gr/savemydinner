@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.tgad.savemydinner.R
 import com.tgad.savemydinner.databinding.FragmentFindRecipesBinding
+import timber.log.Timber
 
 class FindRecipesFragment : Fragment() {
 
@@ -22,17 +22,6 @@ class FindRecipesFragment : Fragment() {
         }
         ViewModelProvider(this, FindRecipesViewModel.Factory(activity.application))
             .get(FindRecipesViewModel::class.java)
-    }
-
-    private lateinit var resultsText: TextView
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.recipes.observe(viewLifecycleOwner) {
-            it.apply {
-                resultsText.text = it.toString()
-            }
-        }
     }
 
     override fun onCreateView(
@@ -48,11 +37,13 @@ class FindRecipesFragment : Fragment() {
         initIncludeAutocomplete(binding.includeAutocomplete)
         observeIncludedIngredients(binding.includeChips)
 
+        binding.recipeGrid.adapter = RecipeAdapter(RecipeAdapter.RecipeClickListener {
+            Timber.e("Click-Listener activated!")
+        })
+
         binding.searchIngredientsButton.setOnClickListener {
             viewModel.searchForRecipes()
         }
-
-        resultsText = binding.resultsText
 
         return binding.root
     }

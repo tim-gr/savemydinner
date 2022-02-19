@@ -21,6 +21,7 @@ class RecipeRepository(private val database: RecipeDatabase) {
         withContext(Dispatchers.IO) { // Disk IO would otherwise block the main thread
             // All database calls here!
             val recipes = Network.recipeApi.getRecipesAsync().await()
+            database.recipeDao.clear()
             database.recipeDao.insertAll(*recipes.asDatabaseModel())
         }
     }
