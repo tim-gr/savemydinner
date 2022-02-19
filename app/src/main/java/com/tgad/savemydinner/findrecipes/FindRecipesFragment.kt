@@ -1,6 +1,7 @@
 package com.tgad.savemydinner.findrecipes
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +39,7 @@ class FindRecipesFragment : Fragment() {
         observeIncludedIngredients(binding.includeChips)
 
         binding.recipeGrid.adapter = RecipeAdapter(RecipeAdapter.RecipeClickListener {
-            Timber.e("Click-Listener activated!")
+            Timber.i("Recipe was clicked: %s", it.title)
         })
 
         binding.searchIngredientsButton.setOnClickListener {
