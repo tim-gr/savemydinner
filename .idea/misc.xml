@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projekte/androidnew/SaveMyDinner/app/src/main/res/drawable-v24/ic_broken_image.xml" value="0.111" />
+        <entry key="..\:/projekte/androidnew/SaveMyDinner/app/src/main/res/drawable-v24/ic_connection_error.xml" value="0.111" />
+        <entry key="..\:/projekte/androidnew/SaveMyDinner/app/src/main/res/drawable-v24/loading_img.xml" value="0.111" />
         <entry key="..\:/projekte/androidnew/SaveMyDinner/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/projekte/androidnew/SaveMyDinner/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
         <entry key="..\:/projekte/androidnew/SaveMyDinner/app/src/main/res/layout/chip_ingredient.xml" value="0.17831813576494426" />

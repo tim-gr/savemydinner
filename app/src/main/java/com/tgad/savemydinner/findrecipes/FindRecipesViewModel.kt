@@ -6,11 +6,17 @@ import com.tgad.savemydinner.R
 import com.tgad.savemydinner.database.getDatabase
 import com.tgad.savemydinner.repository.RecipeRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.lang.Exception
 
 class FindRecipesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = getDatabase(application)
     private val recipeRepository = RecipeRepository(database)
+
+    private val _recipeRequestStatus = MutableLiveData<RecipeRequestStatus>()
+    val recipeRequestStatus: LiveData<RecipeRequestStatus>
+        get() = _recipeRequestStatus
 
     val recipes = recipeRepository.recipes
 
@@ -46,7 +52,14 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
 
     fun searchForRecipes() {
         viewModelScope.launch {
-            recipeRepository.refreshRecipes()
+            _recipeRequestStatus.value = RecipeRequestStatus.LOADING
+            try {
+                recipeRepository.refreshRecipes()
+                _recipeRequestStatus.value = RecipeRequestStatus.DONE
+            } catch(e: Exception) {
+                _recipeRequestStatus.value = RecipeRequestStatus.ERROR
+                Timber.e(e)
+            }
         }
     }
 
@@ -61,3 +74,5 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
     }
 
 }
+
+enum class RecipeRequestStatus { LOADING, ERROR, DONE }

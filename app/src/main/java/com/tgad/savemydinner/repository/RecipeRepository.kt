@@ -21,9 +21,8 @@ class RecipeRepository(private val database: RecipeDatabase) {
     suspend fun refreshRecipes() {
         withContext(Dispatchers.IO) { // Disk IO would otherwise block the main thread
 
+            // Use only one of these code lines to either call the real or the local backend
             //val recipes = Network.recipeApi.getRecipesAsync().await()
-
-            // Calls localhost (Activate for development)
             val recipes = NetworkLocal.recipeApi.getRecipesLocalNetworkAsync().await()
 
             // All database calls here (in this context)!

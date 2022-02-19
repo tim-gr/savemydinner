@@ -16,7 +16,7 @@ interface RecipeDao {
     fun clear()
 }
 
-@Database(entities = [DatabaseRecipe::class], version = 1)
+@Database(entities = [DatabaseRecipe::class], version = 1)//, autoMigrations = [AutoMigration(from = 1, to = 2)])
 abstract class RecipeDatabase : RoomDatabase() {
     abstract val recipeDao: RecipeDao
 }

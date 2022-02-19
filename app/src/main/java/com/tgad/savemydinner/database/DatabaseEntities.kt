@@ -8,14 +8,16 @@ import com.tgad.savemydinner.domain.Recipe
 data class DatabaseRecipe constructor(
     @PrimaryKey
     val recipeId: Long,
-    val title: String
+    val title: String,
+    val imageUrl: String
 )
 
 fun List<DatabaseRecipe>.asDomainModel(): List<Recipe> {
     return map {
         Recipe(
             recipeId = it.recipeId,
-            title = it.title
+            title = it.title,
+            imageUrl = it.imageUrl
         )
     }
 }

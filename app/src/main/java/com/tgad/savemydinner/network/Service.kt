@@ -12,6 +12,7 @@ import retrofit2.http.GET
 // If you add more services, split this to multiple files and make sure to share the retrofit
 // object between services.
 
+// Json-Server: json-server --watch resultRecipes1.json --port 8000
 // Call 1: https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=5&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c
 // Call 2: https://api.spoonacular.com/recipes/findByIngredients?ingredients=noodles,+tomatoes&number=5&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c
 
