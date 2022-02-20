@@ -21,7 +21,7 @@ interface RecipeService {
     @GET("recipes")
     fun getRecipesLocalNetworkAsync(): Deferred<List<NetworkRecipe>>
 
-    @GET("recipes/findByIngredients?number=6&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c")
+    @GET("recipes/findByIngredients?number=5&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c")
     fun getRecipesAsync(@Query("ingredients") ingredients: String): Deferred<List<NetworkRecipe>>
 
     @GET("food/ingredients/autocomplete?number=3&apiKey=7e6c3f535db14f41ae18917aedd0e80c")

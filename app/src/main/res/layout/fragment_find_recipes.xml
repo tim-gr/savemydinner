@@ -65,7 +65,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipe_grid"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
@@ -73,13 +73,13 @@
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_ingredients_button"
             app:listData="@{viewModel.recipes}"
-            app:spanCount="2"
+            android:orientation="horizontal"
+            app:spanCount="1"
             tools:itemCount="5"
             tools:listitem="@layout/item_recipe" />
 
