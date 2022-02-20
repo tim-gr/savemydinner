@@ -14,9 +14,13 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
     private val database = getDatabase(application)
     private val recipeRepository = RecipeRepository(database)
 
-    private val _recipeRequestStatus = MutableLiveData<RecipeRequestStatus>()
+    private var _recipeRequestStatus = MutableLiveData<RecipeRequestStatus>()
     val recipeRequestStatus: LiveData<RecipeRequestStatus>
         get() = _recipeRequestStatus
+
+    private var _autocompleteData = MutableLiveData<List<String>>()
+    val autocompleteData: LiveData<List<String>>
+        get() = _autocompleteData
 
     val recipes = recipeRepository.recipes
 
@@ -24,16 +28,8 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
     val includedIngredients: LiveData<List<String>>
         get() = _includedIngredients
 
-    private val availableIngredients: Array<out String> =
-        application.resources.getStringArray(R.array.ingredients_array)
-
     init {
         _includedIngredients.value = emptyList<String>()
-    }
-
-    fun getAvailableIngredients(): Array<out String> {
-        // TODO: Filling database with available ingredients (at the first call?)
-        return availableIngredients
     }
 
     fun addIncludedIngredient(ingredient: String) {
@@ -54,11 +50,20 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
             _recipeRequestStatus.value = RecipeRequestStatus.LOADING
             try {
-                recipeRepository.refreshRecipes()
+                recipeRepository.refreshRecipes(_includedIngredients.value!!)
                 _recipeRequestStatus.value = RecipeRequestStatus.DONE
             } catch(e: Exception) {
                 _recipeRequestStatus.value = RecipeRequestStatus.ERROR
                 Timber.e(e)
+            }
+        }
+    }
+
+    fun refreshAutocomplete(search: String) {
+        viewModelScope.launch {
+            val result = recipeRepository.findIngredientsWithAutocomplete(search)
+            _autocompleteData.value = result.map {
+                it.name
             }
         }
     }

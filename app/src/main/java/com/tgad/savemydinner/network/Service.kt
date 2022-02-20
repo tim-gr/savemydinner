@@ -7,6 +7,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 // Since we only have one service, this can all go in one file.
 // If you add more services, split this to multiple files and make sure to share the retrofit
@@ -20,8 +21,11 @@ interface RecipeService {
     @GET("recipes")
     fun getRecipesLocalNetworkAsync(): Deferred<List<NetworkRecipe>>
 
-    @GET("recipes/findByIngredients?ingredients=noodles,+tomatoes&number=5&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c")
-    fun getRecipesAsync(): Deferred<List<NetworkRecipe>>
+    @GET("recipes/findByIngredients?number=6&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7e6c3f535db14f41ae18917aedd0e80c")
+    fun getRecipesAsync(@Query("ingredients") ingredients: String): Deferred<List<NetworkRecipe>>
+
+    @GET("food/ingredients/autocomplete?number=3&apiKey=7e6c3f535db14f41ae18917aedd0e80c")
+    fun findIngredientsForAutocompleteAsync(@Query("query") query: String): Deferred<List<NetworkIngredient>>
 }
 
 /**

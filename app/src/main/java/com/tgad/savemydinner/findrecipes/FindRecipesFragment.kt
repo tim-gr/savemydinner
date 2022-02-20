@@ -1,8 +1,8 @@
 package com.tgad.savemydinner.findrecipes
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,11 +58,23 @@ class FindRecipesFragment : Fragment() {
     }
 
     private fun initIncludeAutocomplete(includeAutocomplete: AutoCompleteTextView) {
-        val adapter = ArrayAdapter(
-            requireContext(), android.R.layout.simple_list_item_1,
-            viewModel.getAvailableIngredients()
-        )
-        includeAutocomplete.setAdapter(adapter)
+        var adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
+
+        viewModel.autocompleteData.observe(viewLifecycleOwner) {
+            adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, it)
+            includeAutocomplete.setAdapter(adapter)
+        }
+
+        includeAutocomplete.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (s.length > 1) {
+                    viewModel.refreshAutocomplete(s.toString())
+                }
+            }
+        })
+
         includeAutocomplete.setOnItemClickListener { _, _, position, _ ->
             val newIngredient = adapter.getItem(position).toString()
             viewModel.addIncludedIngredient(newIngredient)
