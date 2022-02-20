@@ -2,7 +2,6 @@ package com.tgad.savemydinner.findrecipes
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.tgad.savemydinner.R
 import com.tgad.savemydinner.database.getDatabase
 import com.tgad.savemydinner.repository.RecipeRepository
 import kotlinx.coroutines.launch
@@ -52,7 +51,7 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
             try {
                 recipeRepository.refreshRecipes(_includedIngredients.value!!)
                 _recipeRequestStatus.value = RecipeRequestStatus.DONE
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 _recipeRequestStatus.value = RecipeRequestStatus.ERROR
                 Timber.e(e)
             }
@@ -62,9 +61,7 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
     fun refreshAutocomplete(search: String) {
         viewModelScope.launch {
             val result = recipeRepository.findIngredientsWithAutocomplete(search)
-            _autocompleteData.value = result.map {
-                it.name
-            }
+            _autocompleteData.value = result
         }
     }
 
