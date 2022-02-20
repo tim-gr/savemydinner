@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
@@ -46,6 +47,7 @@ class FindRecipesFragment : Fragment() {
 
         binding.searchIngredientsButton.setOnClickListener {
             viewModel.searchForRecipes()
+            binding.includeAutocomplete.onEditorAction(EditorInfo.IME_ACTION_DONE)
         }
 
         viewModel.recipeRequestStatus.observe(viewLifecycleOwner) {

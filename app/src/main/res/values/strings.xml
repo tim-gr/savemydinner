@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Save My Dinner</string>
     <string name="find_meal_header">Find my meal</string>
-    <string name="find_meal_include">Include this:</string>
+    <string name="find_meal_include">Include ingredients:</string>
     <string name="find_meal_exclude">Exclude this:</string>
     <string name="find_meal_start_search">Search</string>
     <string name="content_description_recipe_image">Image of a recipe</string>
-    <string name="find_meal_include_input">Which ingredients would you like to include?</string>
+    <string name="find_meal_include_input">Enter ingredient</string>
 </resources>
