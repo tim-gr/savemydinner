@@ -13,6 +13,8 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
     private val database = getDatabase(application)
     private val recipeRepository = RecipeRepository(database)
 
+    val recipes = recipeRepository.recipes
+
     private var _recipeRequestStatus = MutableLiveData<RecipeRequestStatus>()
     val recipeRequestStatus: LiveData<RecipeRequestStatus>
         get() = _recipeRequestStatus
@@ -20,8 +22,6 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
     private var _autocompleteData = MutableLiveData<List<String>>()
     val autocompleteData: LiveData<List<String>>
         get() = _autocompleteData
-
-    val recipes = recipeRepository.recipes
 
     private var _includedIngredients = MutableLiveData<List<String>>()
     val includedIngredients: LiveData<List<String>>
@@ -39,7 +39,7 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
         _includedIngredients.value = list!!
     }
 
-    fun removeIngredient(ingredient: String) {
+    fun removeIncludedIngredient(ingredient: String) {
         val list = _includedIngredients.value?.toMutableList()
         list?.remove(ingredient)
         _includedIngredients.value = list!!

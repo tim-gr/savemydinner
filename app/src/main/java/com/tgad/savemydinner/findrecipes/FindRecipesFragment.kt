@@ -60,12 +60,12 @@ class FindRecipesFragment : Fragment() {
     }
 
     private fun initIncludeAutocomplete(includeAutocomplete: AutoCompleteTextView) {
-        var adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
+        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
+        includeAutocomplete.setAdapter(adapter)
 
         viewModel.autocompleteData.observe(viewLifecycleOwner) {
-            adapter =
-                ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, it)
-            includeAutocomplete.setAdapter(adapter)
+            adapter.clear()
+            adapter.addAll(it)
         }
 
         includeAutocomplete.addTextChangedListener(object : TextWatcher {
@@ -74,6 +74,7 @@ class FindRecipesFragment : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // Only refresh autocomplete when the user is typing - not when an item was selected.
                 if (s.length > 1 && (count - before) < 2) {
+                    Timber.e(s.toString())
                     viewModel.refreshAutocomplete(s.toString())
                 }
             }
@@ -107,7 +108,7 @@ class FindRecipesFragment : Fragment() {
         chip.text = ingredient
         chip.tag = ingredient
         chip.setOnCloseIconClickListener {
-            viewModel.removeIngredient(chip.text as String)
+            viewModel.removeIncludedIngredient(chip.text as String)
         }
         chipGroup.addView(chip)
     }

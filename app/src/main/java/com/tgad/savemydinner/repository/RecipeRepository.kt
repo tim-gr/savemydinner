@@ -29,7 +29,7 @@ class RecipeRepository(private val database: RecipeDatabase) {
                 NetworkLocal.recipeApi.getRecipesLocalNetworkAsync().await()
             }
 
-            // All database calls here (in this context)!
+            // All database calls here (in this context)
             database.recipeDao.clear()
             database.recipeDao.insertAll(*recipes.asDatabaseModel())
         }

@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/findMealsFragment">
+    app:startDestination="@id/recipes_fragment">
 
     <fragment
-        android:id="@+id/findMealsFragment"
+        android:id="@+id/recipes_fragment"
         android:name="com.tgad.savemydinner.findrecipes.FindRecipesFragment"
-        android:label="fragment_find_meals"
+        android:label="fragment_find_recipes"
         tools:layout="@layout/fragment_find_recipes" />
+    <fragment
+        android:id="@+id/favorites_fragment"
+        android:name="com.tgad.savemydinner.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/shopping_fragment"
+        android:name="com.tgad.savemydinner.shopping.ShoppingFragment"
+        android:label="fragment_shopping"
+        tools:layout="@layout/fragment_shopping" />
 </navigation>

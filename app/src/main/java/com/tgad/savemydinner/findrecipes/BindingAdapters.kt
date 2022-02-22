@@ -1,6 +1,5 @@
 package com.tgad.savemydinner.findrecipes
 
-import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
