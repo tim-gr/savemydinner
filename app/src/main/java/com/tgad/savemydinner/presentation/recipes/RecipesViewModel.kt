@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.presentation.findrecipes
+package com.tgad.savemydinner.presentation.recipes
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
 
-class FindRecipesViewModel(application: Application) : AndroidViewModel(application) {
+class RecipesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = getDatabase(application)
     private val recipeRepository = RecipeRepository(database) // RecipeLocalRepository(database)
@@ -67,9 +67,9 @@ class FindRecipesViewModel(application: Application) : AndroidViewModel(applicat
 
     class Factory(private val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(FindRecipesViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(RecipesViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return FindRecipesViewModel(app) as T
+                return RecipesViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct view model")
         }

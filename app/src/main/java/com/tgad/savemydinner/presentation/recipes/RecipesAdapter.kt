@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.presentation.findrecipes
+package com.tgad.savemydinner.presentation.recipes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tgad.savemydinner.databinding.ItemRecipeBinding
 import com.tgad.savemydinner.domain.entities.Recipe
 
-class RecipeAdapter(val onClickListener: RecipeClickListener) :
-    ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(DiffCallback) {
+class RecipesAdapter(val onClickListener: RecipeClickListener) :
+    ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(DiffCallback) {
 
     class RecipeViewHolder(private var binding: ItemRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {

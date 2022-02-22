@@ -1,13 +1,15 @@
 <resources>
+
     <string name="app_name">Save My Dinner</string>
-    <string name="find_meal_header">Find my meal</string>
-    <string name="find_meal_include">Include ingredients:</string>
-    <string name="find_meal_exclude">Exclude this:</string>
-    <string name="find_meal_start_search">Search</string>
-    <string name="content_description_recipe_image">Image of a recipe</string>
-    <string name="find_meal_include_input">Enter ingredient</string>
 
     <string name="bottom_nav_recipes">Recipes</string>
     <string name="bottom_nav_favorites">Favorites</string>
     <string name="bottom_nav_shopping">Shopping</string>
+
+    <string name="recipes_include">Include ingredients:</string>
+    <string name="recipes_include_input">Enter ingredient</string>
+    <string name="recipes_exclude">Exclude ingredients:</string>
+    <string name="recipes_start_search">Search</string>
+    <string name="content_description_recipe_image">Image of a recipe</string>
+
 </resources>

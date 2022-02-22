@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/recipes_fragment"
-        android:name="com.tgad.savemydinner.presentation.findrecipes.FindRecipesFragment"
-        android:label="fragment_find_recipes"
-        tools:layout="@layout/fragment_find_recipes" />
+        android:name="com.tgad.savemydinner.presentation.recipes.RecipesFragment"
+        android:label="fragment_recipes"
+        tools:layout="@layout/fragment_recipes" />
     <fragment
         android:id="@+id/favorites_fragment"
         android:name="com.tgad.savemydinner.presentation.favorites.FavoritesFragment"

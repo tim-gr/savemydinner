@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.presentation.findrecipes
+package com.tgad.savemydinner.presentation.recipes
 
 import android.os.Bundle
 import android.text.Editable
@@ -15,17 +15,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.tgad.savemydinner.R
-import com.tgad.savemydinner.databinding.FragmentFindRecipesBinding
+import com.tgad.savemydinner.databinding.FragmentRecipesBinding
 import timber.log.Timber
 
-class FindRecipesFragment : Fragment() {
+class RecipesFragment : Fragment() {
 
-    private val viewModel: FindRecipesViewModel by lazy {
+    private val viewModel: RecipesViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onViewCreated()"
         }
-        ViewModelProvider(this, FindRecipesViewModel.Factory(activity.application))
-            .get(FindRecipesViewModel::class.java)
+        ViewModelProvider(this, RecipesViewModel.Factory(activity.application))
+            .get(RecipesViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -34,14 +34,14 @@ class FindRecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentFindRecipesBinding.inflate(inflater)
+        val binding = FragmentRecipesBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         initIncludeAutocomplete(binding.includeAutocomplete)
         observeIncludedIngredients(binding.includeChips)
 
-        binding.recipeGrid.adapter = RecipeAdapter(RecipeAdapter.RecipeClickListener {
+        binding.recipeGrid.adapter = RecipesAdapter(RecipesAdapter.RecipeClickListener {
             Timber.i("Recipe was clicked: %s", it.title)
         })
 

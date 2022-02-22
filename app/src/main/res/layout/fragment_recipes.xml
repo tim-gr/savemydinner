@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.tgad.savemydinner.presentation.findrecipes.FindRecipesViewModel" />
+            type="com.tgad.savemydinner.presentation.recipes.RecipesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.findrecipes.FindRecipesFragment">
+        tools:context=".presentation.recipes.RecipesFragment">
 
         <TextView
             android:id="@+id/include_text"
@@ -22,7 +22,7 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
-            android:text="@string/find_meal_include"
+            android:text="@string/recipes_include"
             android:textSize="@dimen/textsize_big"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
-            android:hint="@string/find_meal_include_input"
+            android:hint="@string/recipes_include_input"
             android:imeOptions="actionSend"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_text"
@@ -57,7 +57,7 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/find_meal_start_search"
+            android:text="@string/recipes_start_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_chips" />

@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.presentation.findrecipes
+package com.tgad.savemydinner.presentation.recipes
 
 import android.widget.ImageView
 import androidx.core.net.toUri
@@ -11,7 +11,7 @@ import com.tgad.savemydinner.domain.entities.Recipe
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Recipe>?) {
-    val adapter = recyclerView.adapter as RecipeAdapter
+    val adapter = recyclerView.adapter as RecipesAdapter
     adapter.submitList(data)
 }
 
