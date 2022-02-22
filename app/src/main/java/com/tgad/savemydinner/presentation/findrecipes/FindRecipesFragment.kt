@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.findrecipes
+package com.tgad.savemydinner.presentation.findrecipes
 
 import android.os.Bundle
 import android.text.Editable
@@ -74,7 +74,6 @@ class FindRecipesFragment : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // Only refresh autocomplete when the user is typing - not when an item was selected.
                 if (s.length > 1 && (count - before) < 2) {
-                    Timber.e(s.toString())
                     viewModel.refreshAutocomplete(s.toString())
                 }
             }

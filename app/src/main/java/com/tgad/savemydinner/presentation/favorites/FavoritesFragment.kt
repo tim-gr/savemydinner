@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.favorites
+package com.tgad.savemydinner.presentation.favorites
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,22 +1,12 @@
-package com.tgad.savemydinner.database
+package com.tgad.savemydinner.data.database
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.tgad.savemydinner.data.database.entities.RecipeEntity
 
-@Dao
-interface RecipeDao {
-    @Query("select * from databaserecipe")
-    fun getRecipes(): LiveData<List<DatabaseRecipe>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: DatabaseRecipe)
-
-    @Query("delete from databaserecipe")
-    fun clear()
-}
-
-@Database(entities = [DatabaseRecipe::class], version = 1)//, autoMigrations = [AutoMigration(from = 1, to = 2)])
+@Database(entities = [RecipeEntity::class], version = 1) //, autoMigrations = [AutoMigration(from = 1, to = 2)])
 abstract class RecipeDatabase : RoomDatabase() {
     abstract val recipeDao: RecipeDao
 }

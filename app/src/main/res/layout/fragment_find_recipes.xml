@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.tgad.savemydinner.findrecipes.FindRecipesViewModel" />
+            type="com.tgad.savemydinner.presentation.findrecipes.FindRecipesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".findrecipes.FindRecipesFragment">
+        tools:context=".presentation.findrecipes.FindRecipesFragment">
 
         <TextView
             android:id="@+id/include_text"

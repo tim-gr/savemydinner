@@ -1,18 +1,18 @@
-package com.tgad.savemydinner.database
+package com.tgad.savemydinner.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.tgad.savemydinner.domain.Recipe
+import com.tgad.savemydinner.domain.entities.Recipe
 
 @Entity
-data class DatabaseRecipe constructor(
+data class RecipeEntity constructor(
     @PrimaryKey
     val recipeId: Long,
     val title: String,
     val imageUrl: String
 )
 
-fun List<DatabaseRecipe>.asDomainModel(): List<Recipe> {
+fun List<RecipeEntity>.asDomainModel(): List<Recipe> {
     return map {
         Recipe(
             recipeId = it.recipeId,

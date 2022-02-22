@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.findrecipes
+package com.tgad.savemydinner.presentation.findrecipes
 
 import android.widget.ImageView
 import androidx.core.net.toUri
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tgad.savemydinner.R
-import com.tgad.savemydinner.domain.Recipe
+import com.tgad.savemydinner.domain.entities.Recipe
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Recipe>?) {

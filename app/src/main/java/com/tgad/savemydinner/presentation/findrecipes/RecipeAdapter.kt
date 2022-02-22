@@ -1,4 +1,4 @@
-package com.tgad.savemydinner.findrecipes
+package com.tgad.savemydinner.presentation.findrecipes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tgad.savemydinner.databinding.ItemRecipeBinding
-import com.tgad.savemydinner.domain.Recipe
+import com.tgad.savemydinner.domain.entities.Recipe
 
 class RecipeAdapter(val onClickListener: RecipeClickListener) :
     ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(DiffCallback) {

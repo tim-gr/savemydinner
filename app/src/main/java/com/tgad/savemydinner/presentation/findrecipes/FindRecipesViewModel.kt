@@ -1,9 +1,9 @@
-package com.tgad.savemydinner.findrecipes
+package com.tgad.savemydinner.presentation.findrecipes
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.tgad.savemydinner.database.getDatabase
-import com.tgad.savemydinner.repository.RecipeRepository
+import com.tgad.savemydinner.data.database.getDatabase
+import com.tgad.savemydinner.data.repository.RecipeRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
@@ -11,7 +11,7 @@ import java.lang.Exception
 class FindRecipesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = getDatabase(application)
-    private val recipeRepository = RecipeRepository(database)
+    private val recipeRepository = RecipeRepository(database) // RecipeLocalRepository(database)
 
     val recipes = recipeRepository.recipes
 
