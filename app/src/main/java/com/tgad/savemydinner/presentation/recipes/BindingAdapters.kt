@@ -9,12 +9,18 @@ import com.bumptech.glide.request.RequestOptions
 import com.tgad.savemydinner.R
 import com.tgad.savemydinner.domain.entities.Recipe
 
+/**
+ * Binds the list data to the recycler view used at the recipes tab.
+ */
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Recipe>?) {
     val adapter = recyclerView.adapter as RecipesAdapter
     adapter.submitList(data)
 }
 
+/**
+ * Binds the images of the recipes at the recipes tab.
+ */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {

@@ -20,23 +20,34 @@ class RecipeRepository(private val database: RecipeDatabase) : RecipeAbstractRep
 
     // Use of Coroutine => suspend
     // Disk IO would otherwise block the main thread
-    override suspend fun refreshRecipes(ingredients: List<String>) = withContext(Dispatchers.IO) {
-        val ingredientsString = ingredients.joinToString(",+")
-        val newRecipes = Network.recipeApi.getRecipesAsync(ingredientsString).await()
-
-        // All database calls here (in this context)
-        database.recipeDao.clear()
-        database.recipeDao.insertAll(*newRecipes.asDatabaseModel())
-    }
-
-    override suspend fun findIngredientsWithAutocomplete(search: String): List<String> =
+    override suspend fun refreshRecipes(ingredients: List<String>): Result<Unit?> =
         withContext(Dispatchers.IO) {
-            var result = Network.recipeApi.findIngredientsForAutocompleteAsync(search).await()
-                .asDomainModel()
-            return@withContext result.map { it.name }
+            try {
+                val ingredientsString = ingredients.joinToString(",+")
+                val newRecipes = Network.recipeApi.getRecipesAsync(ingredientsString).await()
+
+                // All database calls here (in this context)
+                database.recipeDao.clear()
+                database.recipeDao.insertAll(*newRecipes.asDatabaseModel())
+
+                return@withContext Result.success(null)
+            } catch (e: Exception) {
+                return@withContext Result.failure(e)
+            }
         }
 
-    override suspend fun saveRecipeAsFavorite(recipe: Recipe) {
+    override suspend fun findIngredientsWithAutocomplete(search: String): Result<List<String>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val ingredients = Network.recipeApi.findIngredientsForAutocompleteAsync(search).await()
+                    .asDomainModel().map { it.name }
+                return@withContext Result.success(ingredients)
+            } catch (e: Exception) {
+                return@withContext Result.failure(e)
+            }
+        }
+
+    override suspend fun saveRecipe(recipe: Recipe): Result<Unit?> {
         TODO("Not yet implemented")
     }
 

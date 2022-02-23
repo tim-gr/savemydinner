@@ -3,10 +3,10 @@ package com.tgad.savemydinner.presentation.recipes
 import android.app.Application
 import androidx.lifecycle.*
 import com.tgad.savemydinner.data.database.getDatabase
+import com.tgad.savemydinner.data.repository.RecipeLocalRepository
 import com.tgad.savemydinner.data.repository.RecipeRepository
+import com.tgad.savemydinner.presentation.common.LoadingStatus
 import kotlinx.coroutines.launch
-import timber.log.Timber
-import java.lang.Exception
 
 class RecipesViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -15,9 +15,9 @@ class RecipesViewModel(application: Application) : AndroidViewModel(application)
 
     val recipes = recipeRepository.recipes
 
-    private var _recipeRequestStatus = MutableLiveData<RecipeRequestStatus>()
-    val recipeRequestStatus: LiveData<RecipeRequestStatus>
-        get() = _recipeRequestStatus
+    private var _loadingStatus = MutableLiveData<LoadingStatus>()
+    val loadingStatus: LiveData<LoadingStatus>
+        get() = _loadingStatus
 
     private var _autocompleteData = MutableLiveData<List<String>>()
     val autocompleteData: LiveData<List<String>>
@@ -33,27 +33,28 @@ class RecipesViewModel(application: Application) : AndroidViewModel(application)
 
     fun addIncludedIngredient(ingredient: String) {
         val list = _includedIngredients.value?.toMutableList()
-        if (list != null && !list.contains(ingredient)) {
-            list.add(ingredient)
+        list?.add(ingredient)
+        if (list != null) {
+            _includedIngredients.value = list!!
         }
-        _includedIngredients.value = list!!
     }
 
     fun removeIncludedIngredient(ingredient: String) {
         val list = _includedIngredients.value?.toMutableList()
         list?.remove(ingredient)
-        _includedIngredients.value = list!!
+        if (list != null) {
+            _includedIngredients.value = list!!
+        }
     }
 
     fun searchForRecipes() {
         viewModelScope.launch {
-            _recipeRequestStatus.value = RecipeRequestStatus.LOADING
-            try {
-                recipeRepository.refreshRecipes(_includedIngredients.value!!)
-                _recipeRequestStatus.value = RecipeRequestStatus.DONE
-            } catch (e: Exception) {
-                _recipeRequestStatus.value = RecipeRequestStatus.ERROR
-                Timber.e(e)
+            _loadingStatus.value = LoadingStatus.LOADING
+            val result = recipeRepository.refreshRecipes(_includedIngredients.value!!)
+            if (result.isSuccess) {
+                _loadingStatus.value = LoadingStatus.DONE
+            } else {
+                _loadingStatus.value = LoadingStatus.ERROR
             }
         }
     }
@@ -61,7 +62,9 @@ class RecipesViewModel(application: Application) : AndroidViewModel(application)
     fun refreshAutocomplete(search: String) {
         viewModelScope.launch {
             val result = recipeRepository.findIngredientsWithAutocomplete(search)
-            _autocompleteData.value = result
+            if (result.isSuccess) {
+                _autocompleteData.value = result.getOrNull()
+            }
         }
     }
 
@@ -76,5 +79,3 @@ class RecipesViewModel(application: Application) : AndroidViewModel(application)
     }
 
 }
-
-enum class RecipeRequestStatus { LOADING, ERROR, DONE }

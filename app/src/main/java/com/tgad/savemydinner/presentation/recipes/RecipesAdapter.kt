@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tgad.savemydinner.databinding.ItemRecipeBinding
 import com.tgad.savemydinner.domain.entities.Recipe
 
-class RecipesAdapter(val onClickListener: RecipeClickListener) :
+class RecipesAdapter(private val onClickListener: RecipeClickListener) :
     ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(DiffCallback) {
 
     class RecipeViewHolder(private var binding: ItemRecipeBinding) :
@@ -23,11 +23,10 @@ class RecipesAdapter(val onClickListener: RecipeClickListener) :
 
     companion object DiffCallback : DiffUtil.ItemCallback<Recipe>() {
         override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-            return oldItem === newItem
+            return oldItem.recipeId == newItem.recipeId
         }
-
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-            return oldItem.recipeId == newItem.recipeId && oldItem.title == newItem.title
+            return oldItem == newItem
         }
     }
 

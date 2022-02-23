@@ -16,6 +16,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.tgad.savemydinner.R
 import com.tgad.savemydinner.databinding.FragmentRecipesBinding
+import com.tgad.savemydinner.presentation.common.LoadingStatus
 import timber.log.Timber
 
 class RecipesFragment : Fragment() {
@@ -50,8 +51,8 @@ class RecipesFragment : Fragment() {
             binding.includeAutocomplete.onEditorAction(EditorInfo.IME_ACTION_DONE)
         }
 
-        viewModel.recipeRequestStatus.observe(viewLifecycleOwner) {
-            if (it == RecipeRequestStatus.ERROR) {
+        viewModel.loadingStatus.observe(viewLifecycleOwner) {
+            if (it == LoadingStatus.ERROR) {
                 Toast.makeText(requireContext(), it.name, Toast.LENGTH_LONG).show()
             }
         }
